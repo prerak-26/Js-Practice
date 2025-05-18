@@ -1,16 +1,12 @@
 let button = document.querySelectorAll(".button");
 let resultPrint = document.querySelector("#result");
-console.log(result);
+let resetScore = document.querySelector("#score");
 
-button.forEach(element => {
-    element.onclick = function() {
-        const userValue = element.textContent;
-        const randomValue = valuGenerator();
-        const computerValue = selectComputerValue(randomValue);
-        let result = resultGenerator(userValue, computerValue);
-        resultPrint.innerText = `You: ${userValue}, computer: ${computerValue}. Result: ${result}`;
-    }  
-});
+const score = {
+    user: 0,
+    computer: 0,
+    draw: 0
+}
 
 function valuGenerator() {
     const randomValue = Math.floor(Math.random() * 3) + 1;
@@ -39,14 +35,35 @@ function resultGenerator(userValue, computerValue) {
     let result = '';
     if (userValue === computerValue) {
         result = 'Draw';
+        score.draw++;
     } else if (
         (userValue === 'Rock' && computerValue === 'Scissors') ||
         (userValue === 'Paper' && computerValue === 'Rock') ||
         (userValue === 'Scissors' && computerValue === 'Paper')
     ) {
         result = 'You win';
+        score.user++;
     } else {
         result = 'Computer wins';
+        score.computer++;
     }
     return result;
 }
+
+button.forEach(element => {
+    element.onclick = function() {
+        const userValue = element.textContent;
+        const randomValue = valuGenerator();
+        const computerValue = selectComputerValue(randomValue);
+        let result = resultGenerator(userValue, computerValue);
+        resultPrint.innerText = `You: ${userValue}, computer: ${computerValue}. Result: ${result}
+        User: ${score.user}, Computer: ${score.computer}, Draw: ${score.draw}`;
+    }  
+});
+
+resetScore.addEventListener("click", function(){
+    score.user = 0;
+    score.computer = 0;
+    score.draw = 0;
+    resultPrint.innerText = `User: ${score.user}, Computer: ${score.computer}, Draw: ${score.draw}`;
+});
