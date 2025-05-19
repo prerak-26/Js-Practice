@@ -2,7 +2,7 @@ let button = document.querySelectorAll(".button");
 let resultPrint = document.querySelector("#result");
 let resetScore = document.querySelector("#score");
 
-const score = {
+let score = JSON.parse(localStorage.getItem('score')) || {
     user: 0,
     computer: 0,
     draw: 0
@@ -47,6 +47,7 @@ function resultGenerator(userValue, computerValue) {
         result = 'Computer wins';
         score.computer++;
     }
+    localStorage.setItem('score', JSON.stringify(score));
     return result;
 }
 
@@ -65,5 +66,7 @@ resetScore.addEventListener("click", function(){
     score.user = 0;
     score.computer = 0;
     score.draw = 0;
+    localStorage.removeItem('score');
     resultPrint.innerText = `User: ${score.user}, Computer: ${score.computer}, Draw: ${score.draw}`;
 });
+
