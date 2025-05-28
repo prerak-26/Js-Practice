@@ -13,50 +13,56 @@ header {
     color: white;
 }
 
-main {
+.container{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    margin: auto;
+    justify-content: center;
+    height: 100vh;
+    background: #473131;
+    background: linear-gradient(to right,  #ee0979, #ff6a00);
+    overflow: hidden;
 }
 
-button {
-    padding: 10px 20px;
+.result_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    justify-content: center;
+}
+
+.button {
     margin: 10px;
-    font-size: 16px;
     cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #4CAF50;
+    background: transparent;
     color: white;
-    transition: background-color 0.3s ease;
+    border: 10px solid black;
+    border-radius: 50%;
+    padding: 1rem;
 }
 
-button:hover {
-    background-color: #45a049;
+.btn-img{
+    width: 8rem;
+    height: 8rem;
 }
 
-/* Responsive styles */
-@media (min-width: 768px) {
-    main {
-        flex-direction: row;
-        justify-content: center;
-    }
-
-    button {
-        margin: 20px;
-        font-size: 18px;
-    }
+.result-img{
+    width: 5rem;
+    height: 5rem;
 }
 
-@media (max-width: 480px) {
-    header {
-        font-size: 18px;
-        padding: 15px;
-    }
+.score-btn{
+    border: none;
+    background: black;
+    padding: 1rem 1.5rem;
+    color: whitesmoke;
+}
 
-    button {
-        font-size: 14px;
-        padding: 8px 16px;
+@media (max-width: 650px) {
+    .container{
+        height: auto;
+        overflow-y: auto;
     }
 }   
