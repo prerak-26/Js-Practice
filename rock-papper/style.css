@@ -58,6 +58,7 @@ header {
     background: black;
     padding: 1rem 1.5rem;
     color: whitesmoke;
+    cursor: pointer;
 }
 
 @media (max-width: 650px) {

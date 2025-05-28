@@ -76,3 +76,4 @@ resetScore.addEventListener("click", function(){
     resultShow.innerHTML = ``
 });
 
+scorePrint.innerText = `You: ${score.user}, Computer: ${score.computer}, Draw: ${score.draw}`;
