@@ -1,0 +1,89 @@
+.input_container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 1rem;
+    margin: 1rem .5rem;
+}
+
+.todo-name {
+    flex: 3 1 25rem;
+    border: none;
+    border-bottom: 2px solid black;
+    outline: none;
+    padding: 1.5rem 1rem;
+}
+
+.todo-time {
+    flex: 2;
+    border: 1px solid black;
+    padding: 1.5rem 1rem;
+}
+
+.todo-add {
+    flex: 1;
+    border: none;
+    background: black;
+    padding: 1.5rem 1rem;
+    color: whitesmoke;
+}
+
+.show_container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 1rem;
+}
+
+.todo-list {
+    display: grid;
+    grid-template-columns: 55rem 2fr 2fr 1fr 1fr;
+    gap: 1rem;
+}
+
+.btn-done {
+    border: none;
+    background: transparent;
+    color: green;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+.btn-delete {
+    border: none;
+    background: transparent;
+    color: red;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+
+    /* Styles for small phones */
+    .input_container {
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 1rem .5rem;
+        row-gap: 1rem;
+    }
+
+    .todo-name {
+        flex:0 0 auto;
+        width: 100%;
+        padding: .5rem .3rem;
+    }
+
+    .todo-time {
+        width: 50%;
+        padding: 1rem .5rem;
+    }
+
+    .todo-add {
+        padding: 1rem 1.5rem;
+    }
+
+    .todo-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
