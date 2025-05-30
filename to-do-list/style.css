@@ -26,6 +26,7 @@
     background: black;
     padding: 1.5rem 1rem;
     color: whitesmoke;
+    cursor: pointer;
 }
 
 .show_container {
