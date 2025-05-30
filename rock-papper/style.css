@@ -19,10 +19,10 @@ header {
     align-items: center;
     margin: auto;
     justify-content: center;
-    height: 100vh;
+    /* height: 100vh; */
     background: #473131;
     background: linear-gradient(to right,  #ee0979, #ff6a00);
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .result_container{
@@ -53,12 +53,13 @@ header {
     height: 5rem;
 }
 
-.score-btn{
+.score-btn, .auto-btn{
     border: none;
     background: black;
     padding: 1rem 1.5rem;
     color: whitesmoke;
     cursor: pointer;
+    margin-bottom: 1rem;
 }
 
 @media (max-width: 650px) {
