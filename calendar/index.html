@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Weekly Calendar with Tasks</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="calendar-container">
+    <div class="calendar-header">
+      <button id="prevWeekBtn">←</button>
+
+      <div class="month-year-selector">
+        <select id="monthSelect"></select>
+        <select id="yearSelect"></select>
+      </div>
+
+      <button id="nextWeekBtn">→</button>
+    </div>
+
+    <div style="text-align: right; margin-bottom: 10px;">
+      <button id="todayBtn">Today</button>
+    </div>
+
+    <div class="calendar-week">
+      <div class="day-labels" id="dayLabels"></div>
+      <div class="day-dates" id="dayDates"></div>
+    </div>
+  </div>
+
+  <div class="tasks-container">
+    <h3>Tasks for <span id="taskDateLabel">None</span>:</h3>
+    <ul id="taskList"></ul>
+  </div>
+
+  <button class="add-task-btn" id="addTaskBtn">+</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
