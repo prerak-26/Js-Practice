@@ -1,6 +1,10 @@
+import { cart, addToCart } from '../data/cart.js';
+import { products } from '../data/products.js';
+
+
 let productHtml = ``;
 
-products.forEach(product =>{
+products.forEach(product => {
     productHtml += `<div class="product-container">
           <div class="product-image-container">
             <img class="product-image"
@@ -13,14 +17,14 @@ products.forEach(product =>{
 
           <div class="product-rating-container">
             <img class="product-rating-stars"
-              src="images/ratings/rating-${(product.rating.stars)*10}.png">
+              src="images/ratings/rating-${(product.rating.stars) * 10}.png">
             <div class="product-rating-count link-primary">
               ${product.rating.counts}
             </div>
           </div>
 
           <div class="product-price">
-            $${((product.priceCents)/100).toFixed(2)}
+            $${((product.priceCents) / 100).toFixed(2)}
           </div>
 
           <div class="product-quantity-container">
@@ -53,31 +57,20 @@ products.forEach(product =>{
 
 document.querySelector('.js-product-container').innerHTML = productHtml;
 
-document.querySelectorAll('.js-add-cart').forEach(button =>{
-    button.addEventListener('click', ()=>{
+function updateCartQuantity() {
+    let cartQuantity = 0;
+    cart.forEach(item => {
+        cartQuantity += item.quantity;
+    });
+    document.querySelector('.cart-quantity').innerText = cartQuantity;
+}
+
+document.querySelectorAll('.js-add-cart').forEach(button => {
+    button.addEventListener('click', () => {
         let productId = button.dataset.productId;
-        let isExisting;
-        let cartQuantity = 0;
 
-        cart.forEach(item =>{
-            if(productId == item.productId){
-                isExisting = item;
-            };
-        });
+        addToCart(productId);
+        updateCartQuantity();
 
-        if(isExisting){
-            isExisting.quantity++;
-        }else{
-            cart.push({
-                productId,
-                quantity: 1
-            })
-        };
-
-        cart.forEach(item =>{
-            cartQuantity += item.quantity;
-        });
-
-        document.querySelector('.cart-quantity').innerText = cartQuantity;
     });
 });
