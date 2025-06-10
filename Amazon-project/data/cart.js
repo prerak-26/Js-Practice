@@ -1,8 +1,7 @@
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
+import saveToLocalStorage from "../scripts/utils/saveLocalStorage.js";
+import updateCartQuantity from "../scripts/utils/cartQuantity.js";
 
-function saveToLocalStorage(name,data){
-    localStorage.setItem(name, JSON.stringify(data));
-}
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 function addToCart(productId) {
     let isExisting;
@@ -14,14 +13,15 @@ function addToCart(productId) {
 
     if (isExisting) {
         isExisting.quantity++;
+        console.log("donee")
     } else {
         cart.push({
             productId,
-            quantity: 1
+            quantity: 1,
+            deliveryOptionId: '1'
         });
-
-        saveToLocalStorage('cart',cart);
     };
+    saveToLocalStorage('cart',cart);
 };
 
 function removeCartItem(productId){
@@ -35,7 +35,9 @@ function removeCartItem(productId){
 
     cart = newCart;
 
+    updateCartQuantity();
+
     saveToLocalStorage('cart',cart);
-}
+};
 
 export {cart,addToCart,removeCartItem};

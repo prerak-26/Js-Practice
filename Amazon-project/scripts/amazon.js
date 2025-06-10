@@ -1,7 +1,7 @@
-import { cart, addToCart } from '../data/cart.js';
+import { addToCart } from '../data/cart.js';
 import { products } from '../data/products.js';
 import { formatCentPrice } from './utils/money.js';
-
+import updateCartQuantity from './utils/cartQuantity.js';
 
 let productHtml = ``;
 
@@ -20,7 +20,7 @@ products.forEach(product => {
             <img class="product-rating-stars"
               src="images/ratings/rating-${(product.rating.stars) * 10}.png">
             <div class="product-rating-count link-primary">
-              ${product.rating.counts}
+              ${product.rating.count}
             </div>
           </div>
 
@@ -58,14 +58,6 @@ products.forEach(product => {
 
 document.querySelector('.js-product-container').innerHTML = productHtml;
 
-function updateCartQuantity() {
-    let cartQuantity = 0;
-    cart.forEach(item => {
-        cartQuantity += item.quantity;
-    });
-    document.querySelector('.cart-quantity').innerText = cartQuantity;
-}
-
 document.querySelectorAll('.js-add-cart').forEach(button => {
     button.addEventListener('click', () => {
         let productId = button.dataset.productId;
@@ -75,3 +67,11 @@ document.querySelectorAll('.js-add-cart').forEach(button => {
 
     });
 });
+
+// document.querySelector('.cart-quantity').innerText = JSON.parse(localStorage.getItem('cartQuantity')) || 0;
+const cartQuantityEl = document.querySelector('.cart-quantity');
+if (cartQuantityEl) {
+  cartQuantityEl.innerText =
+    JSON.parse(localStorage.getItem('cartQuantity')) || 0;
+}
+
