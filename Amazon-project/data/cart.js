@@ -13,7 +13,6 @@ function addToCart(productId) {
 
     if (isExisting) {
         isExisting.quantity++;
-        console.log("donee")
     } else {
         cart.push({
             productId,
@@ -40,4 +39,17 @@ function removeCartItem(productId){
     saveToLocalStorage('cart',cart);
 };
 
-export {cart,addToCart,removeCartItem};
+function updateDeliveryOption(productId, deliveryOptionId){
+    let matchingProduct;
+    cart.forEach((cartItem) => {
+        if(cartItem.productId === productId){
+            matchingProduct = cartItem;
+        }
+    });
+
+    matchingProduct.deliveryOptionId = deliveryOptionId;
+
+    saveToLocalStorage('cart',cart);
+}
+
+export {cart,addToCart,removeCartItem, updateDeliveryOption};
