@@ -1,5 +1,6 @@
 import { cart } from "../../data/cart.js";
 import saveToLocalStorage from "./saveLocalStorage.js";
+import printCartQuantity from "./cartQuantityHtml.js";
 
 function updateCartQuantity() {
     let cartQuantity = 0;
@@ -7,19 +8,7 @@ function updateCartQuantity() {
         cartQuantity += item.quantity;
     });
     saveToLocalStorage('cartQuantity', cartQuantity);
-    // document.querySelector('.cart-quantity').innerText = JSON.parse(localStorage.getItem('cartQuantity')) || 0;
-    const cartQuantityEl = document.querySelector('.cart-quantity');
-    if (cartQuantityEl) {
-        cartQuantityEl.innerText =
-            JSON.parse(localStorage.getItem('cartQuantity')) || 0;
-    }
-    let checkoutCartQuantityEl = document.querySelectorAll('.js-cart-quantity');
-    if (checkoutCartQuantityEl) {
-        checkoutCartQuantityEl.forEach((el) => {
-            el.innerText =
-                `${JSON.parse(localStorage.getItem('cartQuantity')) || 0} items`;
-        });
-    };
+    printCartQuantity();
 }
 
 export default updateCartQuantity;

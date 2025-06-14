@@ -2,6 +2,9 @@ import { addToCart } from '../data/cart.js';
 import { products } from '../data/products.js';
 import { formatCentPrice } from './utils/money.js';
 import updateCartQuantity from './utils/cartQuantity.js';
+import printCartQuantity from './utils/cartQuantityHtml.js';
+
+printCartQuantity();
 
 let productHtml = ``;
 
@@ -67,11 +70,3 @@ document.querySelectorAll('.js-add-cart').forEach(button => {
 
     });
 });
-
-// document.querySelector('.cart-quantity').innerText = JSON.parse(localStorage.getItem('cartQuantity')) || 0;
-const cartQuantityEl = document.querySelector('.cart-quantity');
-if (cartQuantityEl) {
-  cartQuantityEl.innerText =
-    JSON.parse(localStorage.getItem('cartQuantity')) || 0;
-}
-
