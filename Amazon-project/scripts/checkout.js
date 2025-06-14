@@ -3,6 +3,7 @@ import { getProduct } from '../data/products.js';
 import { formatCentPrice } from './utils/money.js';
 import { deliveryOptions, getDeliveryOption } from '../data/deliveryOption.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
+import printCartQuantity from './utils/cartQuantityHtml.js';
 
 let checkoutHtml = ``;
 
@@ -135,7 +136,7 @@ function renderPaymentSummary() {
           </div>
 
           <div class="payment-summary-row">
-            <div>Items <span class="js-cart-quantity">${JSON.parse(localStorage.getItem('cartQuantity')) || 0} items</span>:</div>
+            <div>Items (<span class="js-cart-quantity">${JSON.parse(localStorage.getItem('cartQuantity')) || 0}</span>):</div>
             <div class="payment-summary-money">$${formatCentPrice(itemsTotal)}</div>
           </div>
 
@@ -169,10 +170,4 @@ function renderPaymentSummary() {
 
 renderPaymentSummary();
 
-let checkoutCartQuantityEl = document.querySelectorAll('.js-cart-quantity');
-if (checkoutCartQuantityEl) {
-  checkoutCartQuantityEl.forEach((el) => {
-    el.innerText =
-      `${JSON.parse(localStorage.getItem('cartQuantity')) || 0} items`;
-  });
-};
+printCartQuantity();
