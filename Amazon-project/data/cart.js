@@ -1,7 +1,13 @@
 import saveToLocalStorage from "../scripts/utils/saveLocalStorage.js";
 import updateCartQuantity from "../scripts/utils/cartQuantity.js";
 
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let cart;
+
+loadFromLocalStorage();
+
+function loadFromLocalStorage(){
+    cart = JSON.parse(localStorage.getItem('cart')) || [];
+}
 
 function addToCart(productId) {
     let isExisting;
@@ -52,4 +58,4 @@ function updateDeliveryOption(productId, deliveryOptionId){
     saveToLocalStorage('cart',cart);
 }
 
-export {cart,addToCart,removeCartItem, updateDeliveryOption};
+export {cart,addToCart,removeCartItem, updateDeliveryOption, loadFromLocalStorage};
