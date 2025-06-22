@@ -9,7 +9,7 @@ printCartQuantity();
 let productHtml = ``;
 
 products.forEach(product => {
-    productHtml += `<div class="product-container">
+  productHtml += `<div class="product-container">
           <div class="product-image-container">
             <img class="product-image"
               src="${product.image}">
@@ -64,11 +64,11 @@ products.forEach(product => {
 document.querySelector('.js-product-container').innerHTML = productHtml;
 
 document.querySelectorAll('.js-add-cart').forEach(button => {
-    button.addEventListener('click', () => {
-        let productId = button.dataset.productId;
+  button.addEventListener('click', () => {
+    let productId = button.dataset.productId;
 
-        addToCart(productId);
-        updateCartQuantity();
+    addToCart(productId);
+    updateCartQuantity();
 
-    });
+  });
 });

@@ -3,13 +3,12 @@ function printCartQuantity() {
     if (checkoutCartQuantityEl) {
         checkoutCartQuantityEl.forEach((el) => {
             let dataValue = el.dataset.cartQuantityItems;
-            if(dataValue){
-                console.log("donee")
+            if (dataValue) {
                 el.innerText =
-                `${JSON.parse(localStorage.getItem('cartQuantity')) || 0} items`;
-            }else{
+                    `${JSON.parse(localStorage.getItem('cartQuantity')) || 0} items`;
+            } else {
                 el.innerText =
-                `${JSON.parse(localStorage.getItem('cartQuantity')) || 0}`;
+                    `${JSON.parse(localStorage.getItem('cartQuantity')) || 0}`;
             };
         });
     };

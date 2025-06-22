@@ -4,6 +4,7 @@ import { formatCentPrice } from './utils/money.js';
 import { deliveryOptions, getDeliveryOption } from '../data/deliveryOption.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import printCartQuantity from './utils/cartQuantityHtml.js';
+import { addOrder } from '../data/order.js';
 
 let checkoutHtml = ``;
 
@@ -101,6 +102,7 @@ document.querySelectorAll('.js-delete-link').forEach((link) => {
     removeCartItem(productId);
     document.querySelector(`.js-cart-item-container-${productId}`).remove();
     renderPaymentSummary();
+    placeOrderBtnVisibility();
   });
 });
 
@@ -160,7 +162,7 @@ function renderPaymentSummary() {
             <div class="payment-summary-money">$${formatCentPrice(orderTotal)}</div>
           </div>
 
-          <button class="place-order-button button-primary">
+          <button class="place-order-button button-primary js-place-order-btn">
             Place your order
           </button>
         `;
@@ -171,3 +173,39 @@ function renderPaymentSummary() {
 renderPaymentSummary();
 
 printCartQuantity();
+
+if (cart.length > 0) {
+
+  document.querySelector(".js-place-order-btn").addEventListener('click', async () => {
+    try {
+      const response = await fetch('https://supersimplebackend.dev/orders', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          cart
+        })
+      });
+
+      const orders = await response.json();
+      addOrder(orders);
+    } catch (error) {
+      console.log("Unexpected Error!", error);
+    };
+
+    window.location.href = 'orders.html';
+  });
+};
+
+function placeOrderBtnVisibility() {
+  if (cart.length === 0) {
+    document.querySelector(".js-place-order-btn").disabled = true;
+    document.querySelector(".js-place-order-btn").classList.add('disabled-button');
+  } else {
+    document.querySelector(".js-place-order-btn").disabled = false;
+    document.querySelector(".js-place-order-btn").classList.remove('disabled-button');
+  }
+};
+
+placeOrderBtnVisibility();
