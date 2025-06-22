@@ -9,7 +9,7 @@ function loadFromLocalStorage() {
     cart = JSON.parse(localStorage.getItem('cart')) || [];
 }
 
-function addToCart(productId) {
+function addToCart(productId,quantity = 1) {
     let isExisting;
     cart.forEach(item => {
         if (productId == item.productId) {
@@ -18,11 +18,11 @@ function addToCart(productId) {
     });
 
     if (isExisting) {
-        isExisting.quantity++;
+        quantity == 1 ? isExisting.quantity++ : isExisting.quantity += quantity;
     } else {
         cart.push({
             productId,
-            quantity: 1,
+            quantity,
             deliveryOptionId: '1'
         });
     };
