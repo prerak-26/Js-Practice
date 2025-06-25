@@ -237,6 +237,9 @@ if (cart.length > 0) {
       console.log("Unexpected Error!", error);
     };
 
+    cart.splice(0);
+    updateCartQuantity();
+    saveToLocalStorage('cart',cart);
     window.location.href = 'orders.html';
   });
 };

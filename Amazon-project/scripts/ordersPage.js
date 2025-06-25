@@ -2,17 +2,15 @@ import { orders } from "../data/order.js";
 import { getProduct } from "../data/products.js";
 import { formatCentPrice } from "./utils/money.js";
 import printCartQuantity from "./utils/cartQuantityHtml.js";
+import updateCartQuantity from "./utils/cartQuantity.js";
+import { addToCart,cart } from "../data/cart.js";
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 
 printCartQuantity();
 
 let orderHTML = ``;
 
-const today = dayjs();
-const dayString = today.format('dddd, MMMM D');
-
 orders.forEach((order, index) => {
-
   let orderId = `${order.products[0].productId.toString()}-${index.toString()}`;
 
   orderHTML += `<div class="order-container">
@@ -21,7 +19,7 @@ orders.forEach((order, index) => {
             <div class="order-header-left-section">
               <div class="order-date">
                 <div class="order-header-label">Order Placed:</div>
-                <div>${dayString}</div>
+                <div>${dayjs(order.orderTime).format('dddd, MMMM D')}</div>
               </div>
               <div class="order-total">
                 <div class="order-header-label">Total:</div>
@@ -72,9 +70,9 @@ function createProductGrid(products) {
               <div class="product-quantity">
                 Quantity: ${product.quantity}
               </div>
-              <button class="buy-again-button button-primary">
+              <button class="buy-again-button button-primary js-buy-again-btn" data-product-id="${matchingProduct.id}">
                 <img class="buy-again-icon" src="images/icons/buy-again.png">
-                <span class="buy-again-message">Buy it again</span>
+                <span class="buy-again-message js-buy-again-message">Buy it again</span>
               </button>
             </div>
 
@@ -89,3 +87,16 @@ function createProductGrid(products) {
 
   return productGridHTML;
 }
+
+document.querySelectorAll('.js-buy-again-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    let {productId} = btn.dataset;
+    let originalText = btn.innerHTML;
+    addToCart(productId);
+    updateCartQuantity();
+    btn.innerHTML = "✓ Added";
+    setTimeout(()=>{
+      btn.innerHTML = originalText;
+    },2000);
+  })
+})
