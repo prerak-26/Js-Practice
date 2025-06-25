@@ -137,6 +137,7 @@ document.querySelectorAll('.update-quantity-link').forEach((link) => {
           cartItem.quantity = newQuantity;
           label.innerText = newQuantity;
           updateCartQuantity();
+          renderPaymentSummary();
           saveToLocalStorage('cart',cart);
         }
       }
