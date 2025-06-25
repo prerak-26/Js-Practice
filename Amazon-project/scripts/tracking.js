@@ -19,6 +19,7 @@ const deliveryDate = dayjs(deliveryDateString, 'D MMMM YYYY');
 
 const orderDateString = `${retriveData.orderTime} ${currentYear}`;
 const orderDate = dayjs(orderDateString, 'D MMM YYYY');
+// const orderDate = dayjs().subtract(5, 'day');
 
 const deliveryMessage = today < deliveryDate ? `Arriving on ${retriveData.date}` : `Delivered on ${retriveData.date}`; 
 
@@ -41,10 +42,36 @@ document.querySelector('.js-product-tracking-container').innerHTML = productData
 
 const duration = deliveryDate.diff(orderDate, 'day');
 const passedDays = today.diff(orderDate, 'day');
-console.log(duration,passedDays)
 
 let progress = Math.max(0, Math.min((passedDays / duration) * 100, 100));
+console.log(progress)
 
 document.querySelector('.js-progress-bar').style.width = `${progress}%`;
 
+let progressLabel = document.querySelectorAll('.js-progress-label');
+
+let trackingStage = [{
+  label: 'Preparing',
+  threshold: 33
+},
+{
+  label: 'Shipped',
+  threshold: 66
+},
+{
+  label: 'Delivered',
+  threshold: 100
+}];
+
+let currentStage = 0;
+
+for(let i = 0; i < trackingStage.length; i++){
+  if(progress >= trackingStage[i].threshold){
+    currentStage = i;
+  };
+};
+
+progressLabel.forEach(el => el.classList.remove('current-status'));
+
+progressLabel[currentStage].classList.add('current-status');
 
