@@ -34,23 +34,25 @@ orders.forEach((order, index) => {
           </div>
 
           <div class="order-details-grid">
-            ${createProductGrid(order.products)}
+            ${createProductGrid(order.products, order.orderTime)}
           </div>
         </div>`;
 });
 
 document.querySelector('.js-order-grid').innerHTML = orderHTML;
 
-function createProductGrid(products) {
+function createProductGrid(products,orderTime) {
   let productGridHTML = ``;
 
   products.forEach((product) => {
     let matchingProduct = getProduct(product.productId);
     let dayString = dayjs(product.estimatedDeliveryTime).format('dddd, MMMM D');
+    let orderDayString = dayjs(orderTime).format('dddd, MMMM D');
     let urlData = {
       date: dayString,
       quantity: product.quantity,
-      id: matchingProduct.id
+      id: matchingProduct.id,
+      orderTime : orderDayString
     }
 
     let urlString = JSON.stringify(urlData);
